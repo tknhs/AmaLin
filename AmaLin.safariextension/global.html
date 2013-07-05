@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript">
+  safari.application.addEventListener("message",function(evt){
+    /* Message from Injecting Scripts */
+    var data = evt.message;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", data, true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4 && xhr.status==200) {
+        var linkit = document.createElement("linkit");
+        linkit.innerHTML = xhr.responseText;
+        var book = linkit.getElementsByTagName("a")[1];
+
+        /* LC have this Book */
+        if (book != null) {
+          var bool = true;
+        }
+        else{
+          var bool = false;
+        }
+
+        /* return response */
+        evt.target.page.dispatchMessage("Response", bool);
+      }
+    }
+    xhr.send();
+  },false);
+</script>
+</head>
+<body>
+</body>
+</html>
+
