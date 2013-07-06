@@ -1,9 +1,10 @@
 {
     "name": "Amazon with LINKIT-II",
-    "version": "0.2",
+    "version": "0.1",
     "manifest_version": 2,
 
     "description": "KITLCにもあるかも！",
+    "update_url": "https://raw.github.com/tknhs/AmaLin/master/AmaLin.chromeextension/updates.xml",
 
     "permissions": [
         "http://*/"
