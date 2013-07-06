@@ -49,6 +49,8 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>https://raw.github.com/tknhs/AmaLin/master/AmaLin.safariextension/updates.plist</string>
 	<key>Website</key>
 	<string>http://kit-shuttle-bus.appspot.com</string>
 </dict>
