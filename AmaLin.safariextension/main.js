@@ -27,5 +27,7 @@ try {
 }
 catch(e) {
   /* Except the books */
+  //console.log(e.name);
+  //console.log(e.message);
 }
 
