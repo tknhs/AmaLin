@@ -10,9 +10,9 @@
        <key>Developer Identifier</key>
        <string>9XCEW2U37M</string>
        <key>CFBundleVersion</key>
-       <string>0.3.1</string>
+       <string>0.4.0</string>
        <key>CFBundleShortVersionString</key>
-       <string>0.3.1</string>
+       <string>0.4.0</string>
        <key>URL</key>
        <string>https://github.com/tknhs/AmaLin/raw/master/AmaLin.safariextension.safariextz</string>
      </dict>
