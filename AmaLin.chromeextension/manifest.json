@@ -1,6 +1,6 @@
 {
     "name": "Amazon with LINKIT-II",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "manifest_version": 2,
 
     "description": "KITLCにもあるかも！",
@@ -16,8 +16,10 @@
             "matches": [
                 "http://www.amazon.co.jp/*/dp/*",
                 "http://www.amazon.co.jp/dp/*",
-                "http://www.amazon.co.jp/gp/product/*"],
-            "js": ["main.js"]
+                "http://www.amazon.co.jp/gp/product/*",
+                "http://www.amazon.co.jp/s/*"],
+            "js": ["jquery.js", "main.js"],
+            "run_at": "document_end"
         }
     ]
 }
