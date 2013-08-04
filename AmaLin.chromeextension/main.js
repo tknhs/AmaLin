@@ -5,94 +5,108 @@
  *
  **/
 
-var local_url = location.pathname;
-var isbn;
-var lc_url = "http://linkit.kanazawa-it.ac.jp/opac/cgi/searchS.cgi?AC=1&SC=F&RI10=IB&SW10="
 
-if (local_url.search("/(dp|gp)(\/product)?\/([0-9]+)(X)?") != -1){
-  /* a book page */
-  isbn = RegExp.$3 + RegExp.$4;
-  lc = lc_url + isbn;
-  request(lc, 0, 0);
-}
-
-if (local_url.search("/s/") != -1){
-  /* search results page */
-  var sp = search_page();
-  $.each(sp.id, function(i){
-    var getID = document.getElementById(sp.id[i]);
-    lc = lc_url + sp.isbn[i];
-    request(lc, 1, i);
-  });
-}
-
-
-function search_page(){
-  var divtag = document.getElementsByTagName("div");
-  var d_id = new Array();
-  var d_isbn = new Array();
-  var cnt = 0;
-
-  for (var i = 0; i < divtag.length; i++){
-    if (divtag[i].id.search("result_[0-9]*") != -1){
-      if (divtag[i].outerHTML.search('name=\"\([0-9]+)(X)?\"') != -1){
-        d_id[cnt] = divtag[i].id;
-        d_isbn[cnt] = RegExp.$1 + RegExp.$2;
-        cnt++;
-      }
-    }
+function AmazonLinkit(prf, nw){
+  if (prf == nw){
+    nw = location.href + location.search;
   }
-  return {id : d_id, isbn : d_isbn};
-}
+  else{
+    prf = location.href + location.search;
+    nw  = location.href + location.search;
 
-function request(lc, whichreq, repeat){
-  /**
-   *  XMLHttpRequest
-   **/
-  var wr = whichreq;
-  var rep = repeat;
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", lc, true);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4 && xhr.status==200) {
-      var linkit = document.createElement("linkit");
-      linkit.innerHTML = xhr.responseText;
-      var book = linkit.getElementsByTagName("a")[1];
+    var local_url = location.pathname;
+    var isbn;
+    var lc_url = "http://linkit.kanazawa-it.ac.jp/opac/cgi/searchS.cgi?AC=1&SC=F&RI10=IB&SW10=";
+    if (local_url.search("/(dp|gp)(\/product)?\/([0-9]+)(X)?") != -1){
+      /* a book page */
+      isbn = RegExp.$3 + RegExp.$4;
+      lc = lc_url + isbn;
+      request(lc, 0, 0);
+    }
+    if (local_url.search("/s/") != -1){
+      /* search results page */
+      var sp = search_page();
+      $.each(sp.id, function(i){
+        var getID = document.getElementById(sp.id[i]);
+        lc = lc_url + sp.isbn[i];
+        request(lc, 1, i);
+      });
+    }
 
-      // LC have this Book.
-      var ele = document.createElement("p");
-      if (book != null) {
-        //console.log("have? : yes");
-        ele.innerHTML = "<a href="+lc+" target='_blank'><font size='3' color='#006400'>LCに所蔵されています</font></a>";
+    function search_page(){
+      var divtag = document.getElementsByTagName("div");
+      var d_id = new Array();
+      var d_isbn = new Array();
+      var cnt = 0;
+
+      for (var i = 0; i < divtag.length; i++){
+        if (divtag[i].id.search("result_[0-9]*") != -1){
+          if (divtag[i].outerHTML.search('name=\"\([0-9]+)(X)?\"') != -1){
+            d_id[cnt] = divtag[i].id;
+            d_isbn[cnt] = RegExp.$1 + RegExp.$2;
+            cnt++;
+          }
+        }
       }
-      else {
-        //console.log("have? : no");
-        ele.innerHTML = "<font size='3' color='#990012'>LCに所蔵されていません</font>";
-      }
+      return {id : d_id, isbn : d_isbn};
+    }
 
-      // which request?
-      if (wr == 0){
-        /* book page */
-        var i = 0;
-        var nodelist = document.getElementsByClassName("buying");
-        for (var nl = 0; nl < nodelist.length; nl++){
-          if (nodelist[nl].id == ""){
-            i++;
-            if (i == 2){
-              nodelist[nl].parentNode.insertBefore(ele, nodelist[nl]);
+    function request(lc, whichreq, repeat){
+      /**
+       *  XMLHttpRequest
+      **/
+      var wr = whichreq;
+      var rep = repeat;
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", lc, true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status==200) {
+          var linkit = document.createElement("linkit");
+          linkit.innerHTML = xhr.responseText;
+          var book = linkit.getElementsByTagName("a")[1];
+
+          // LC have this Book.
+          var ele = document.createElement("p");
+          if (book != null) {
+            //console.log("have? : yes");
+            ele.innerHTML = "<a href="+lc+" target='_blank'><font size='3' color='#006400'>LCに所蔵されています</font></a>";
+          }
+          else {
+            //console.log("have? : no");
+            ele.innerHTML = "<font size='3' color='#990012'>LCに所蔵されていません</font>";
+          }
+
+          // which request?
+          if (wr == 0){
+            /* book page */
+            var i = 0;
+            var nodelist = document.getElementsByClassName("buying");
+            for (var nl = 0; nl < nodelist.length; nl++){
+              if (nodelist[nl].id == ""){
+                i++;
+                if (i == 2){
+                  nodelist[nl].parentNode.insertBefore(ele, nodelist[nl]);
+                }
+              }
+            }
+          }
+          else if(wr == 1){
+            /* search result page */
+            var getID = document.getElementById(sp.id[rep]);
+            if (getID.attributes[2].nodeValue == sp.isbn[rep]){
+              getID.childNodes[3].nextSibling.appendChild(ele);
             }
           }
         }
       }
-      else if(wr == 1){
-        /* search result page */
-        var getID = document.getElementById(sp.id[rep]);
-        if (getID.attributes[2].nodeValue == sp.isbn[rep]){
-          getID.childNodes[3].nextSibling.appendChild(ele);
-        }
-      }
+      xhr.send();
     }
   }
-  xhr.send();
+  setTimeout(function(){ AmazonLinkit(prf, nw); }, 1500);
 }
+
+var nw = "";
+var prf = location.href + location.search;
+AmazonLinkit(prf, nw);
+
 
