@@ -26,7 +26,6 @@ function AmazonLinkit(prf, nw){
       /* search results page */
       var sp = search_page();
       $.each(sp.id, function(i){
-        var getID = document.getElementById(sp.id[i]);
         lc = lc_url + sp.isbn[i];
         request(lc, 1, i, sp);
       });
@@ -66,7 +65,7 @@ function request(lc, whichreq, repeat, srch){
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
   xhr.onreadystatechange = function() {
-    if (xhr.readyState == 4 && xhr.status==200) {
+    if (xhr.readyState == 4 && xhr.status == 200) {
       var linkit = document.createElement("linkit");
       linkit.innerHTML = xhr.responseText;
       var book = linkit.getElementsByTagName("a")[1];
