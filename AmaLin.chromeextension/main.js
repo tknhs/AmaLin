@@ -68,6 +68,7 @@ function request(lc, whichreq, repeat, srch){
     if (xhr.readyState == 4 && xhr.status == 200) {
       var linkit = document.createElement("linkit");
       linkit.innerHTML = xhr.responseText;
+      lend = (linkit.innerHTML.search('保管') != -1) ? '<font color="blue" style="font-weight: bold;">保管</font>' : '<font color="red" style="font-weight: bold;">貸出</font>';
       var book = linkit.getElementsByTagName("a")[1];
 
       // LC have this Book.
@@ -75,7 +76,7 @@ function request(lc, whichreq, repeat, srch){
       ele.innerHTML = (
           (book == null)
           ? "<font size='3' color='#990012'>LCに所蔵されていません</font>"
-          : "<a href="+lc+" target='_blank'><font size='3' color='#006400'>LCに所蔵されています</font></a>"
+          : "<p style='border: none; border-radius: 25px; padding: 5px; text-align: center; background-color: #dddddd;'><a href="+lc+" target='_blank'><font size='3' color='#006400'>LCに所蔵されています</font></a>　"+lend+"</p>"
       );
 
       // which request?
