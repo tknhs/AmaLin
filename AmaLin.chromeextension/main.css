@@ -1,0 +1,38 @@
+
+/* amalinで作成したDOM */
+.amalin{
+  margin: 10px 0px;
+  font-family: 'メイリオ', Meiryo, sans-serif;
+  font-size: 125%;
+  color: #990012;
+}
+
+/* メインコンテンツ */
+.amalin-content{
+  border: none;
+  border-radius: 25px;
+  margin: 0px 50px;
+  padding: 5px;
+  text-align: center;
+  background-color: #dddddd;
+
+  font-size: 110%;
+  color: #006400;
+}
+
+/* メインコンテンツをホバー */
+.amalin-content:hover{
+  background-color: #cccccc;
+}
+
+/* 保管 */
+.amalin-sub1{
+  font-size: 80%;
+  color: blue;
+}
+
+/* 貸出 */
+.amalin-sub2{
+  font-size: 80%;
+  color: red;
+}

@@ -68,15 +68,16 @@ function request(lc, whichreq, repeat, srch){
     if (xhr.readyState == 4 && xhr.status == 200) {
       var linkit = document.createElement("linkit");
       linkit.innerHTML = xhr.responseText;
-      lend = (linkit.innerHTML.search('保管') != -1) ? '<font color="blue" style="font-weight: bold;">保管</font>' : '<font color="red" style="font-weight: bold;">貸出</font>';
+      lend = (linkit.innerHTML.search('保管') != -1) ? '<b class="amalin-sub1">保管</b>' : '<b class="amalin-sub2">貸出</b>';
       var book = linkit.getElementsByTagName("a")[1];
 
       // LC have this Book.
-      var ele = document.createElement("p");
+      var ele = document.createElement("div");
+      ele.setAttribute("class", "amalin");
       ele.innerHTML = (
           (book == null)
-          ? "<font size='3' color='#990012'>LCに所蔵されていません</font>"
-          : "<p style='border: none; border-radius: 25px; padding: 5px; text-align: center; background-color: #dddddd;'><a href="+lc+" target='_blank'><font size='3' color='#006400'>LCに所蔵されています</font></a>　"+lend+"</p>"
+          ? "LCに所蔵されていません"
+          : "<a href="+lc+" target='_blank' style='text-decoration: none;'><div class='amalin-content'>LCに所蔵されています　"+lend+"</div></a>"
       );
 
       // which request?
