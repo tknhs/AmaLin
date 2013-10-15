@@ -22,7 +22,7 @@ function AmazonLinkit(prf, nw){
       lc = lc_url + isbn;
       request(lc, 0);
     }
-    if (local_url.search("/s/") != -1){
+    if (local_url.search("(/s)[/|?]*") != -1){
       /* search results page */
       var sp = search_page();
       $.each(sp.id, function(i){
@@ -84,7 +84,7 @@ function request(lc, whichreq, repeat, srch){
       if (wr == 0){
         /* book page */
         var i = 0;
-        var nodelist = document.getElementsByClassName("buying");
+        var nodelist = $('.buying');
         for (var nl = 0; nl < nodelist.length; nl++){
           if (nodelist[nl].id == ""){
             i++;
@@ -96,9 +96,8 @@ function request(lc, whichreq, repeat, srch){
       }
       else if(wr == 1){
         /* search result page */
-        var getID = document.getElementById(sp.id[rep]);
-        if (getID.attributes[2].nodeValue == sp.isbn[rep]){
-          getID.childNodes[3].nextSibling.appendChild(ele);
+        if ($('#'+sp.id[rep]).attr('name') == sp.isbn[rep]){
+          $('#'+sp.id[rep]+' h3.newaps').append(ele);
         }
       }
     }
