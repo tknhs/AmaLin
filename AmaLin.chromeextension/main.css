@@ -1,6 +1,12 @@
+/**
+ *
+ *  Title  : Amazon.co.jp with LINKIT-II
+ *  Author : tknhs
+ *
+ **/
 
 /* amalinで作成したDOM */
-.amalin{
+.amalin, .amalin-affi {
   margin: 10px 0px;
   font-family: 'メイリオ', Meiryo, sans-serif;
   font-size: 125%;
@@ -8,11 +14,12 @@
 }
 
 /* メインコンテンツ */
-.amalin-content{
+.amalin-content {
+  display:inline;
   border: none;
-  border-radius: 25px;
+  border-radius: 5px;
   margin: 0px 50px;
-  padding: 5px;
+  padding: 5px 15px;
   text-align: center;
   background-color: #dddddd;
 
@@ -21,18 +28,36 @@
 }
 
 /* メインコンテンツをホバー */
-.amalin-content:hover{
+.amalin-content:hover {
   background-color: #cccccc;
 }
 
-/* 保管 */
-.amalin-sub1{
+/* 保管・貸出 */
+.amalin-sub {
   font-size: 80%;
+}
+.amalin-sub1 {
   color: blue;
 }
-
-/* 貸出 */
-.amalin-sub2{
-  font-size: 80%;
+.amalin-sub2 {
   color: red;
 }
+
+/* アソシエイト */
+.amalin-affi {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  display:inline;
+  font-size: 80%;
+}
+.amalin-affi0 {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.amalin-affi1 {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+
