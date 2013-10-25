@@ -21,14 +21,14 @@
   margin: 0px 50px;
   padding: 5px 15px;
   text-align: center;
-  background-color: #dddddd;
-
   font-size: 110%;
+}
+.amalin-content1 {
+  background-color: #dddddd;
   color: #006400;
 }
-
 /* メインコンテンツをホバー */
-.amalin-content:hover {
+.amalin-content1:hover {
   background-color: #cccccc;
 }
 
@@ -48,7 +48,9 @@
   border: 1px solid transparent;
   border-radius: 5px;
   display:inline;
-  font-size: 80%;
+  font-size: 70%;
+  margin-left: -40px;
+  padding: 0px 4px;
 }
 .amalin-affi0 {
   color: #3a87ad;

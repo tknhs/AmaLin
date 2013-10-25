@@ -78,8 +78,8 @@ function request(isbn, lc, whichreq, repeat, srch){
       ele.setAttribute('class', 'amalin');
       ele.innerHTML = (
           (book == null)
-          ? 'LCに所蔵されていません'
-          : '<a href='+lc+' target="_blank" style="text-decoration: none;"><div class="amalin-content">LCに所蔵されています '+lend+'</div></a>'
+          ? '<div class="amalin-content amalin-content0">LCに所蔵されていません</div>'
+          : '<a href='+lc+' target="_blank" style="text-decoration: none;"><div class="amalin-content amalin-content1">LCに所蔵されています '+lend+'</div></a>'
       );
 
       // which request?
@@ -106,7 +106,8 @@ function request(isbn, lc, whichreq, repeat, srch){
           affi.setAttribute('class', 'amalin-affi amalin-affi1');
           affi.innerHTML = '<a href='+ affi_url +' style="text-decoration: none;">アフィリエイトに協力する</a>';
         }
-        $(affi).insertBefore('.parseasinTitle');
+        //$(affi).insertBefore('.parseasinTitle');
+        $('.amalin').append(affi);
       }
       else if(wr == 1){
         /* search result page */
